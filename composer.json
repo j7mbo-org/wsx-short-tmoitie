@@ -1,0 +1,26 @@
+{
+  "name": "websockets-workshop/3-subscribing-non-blocking",
+  "require": {
+    "components/bootstrap": "4.0.*@dev",
+    "react/child-process": "^0.4.3",
+    "voryx/thruway": "0.4.*@dev",
+    "evenement/evenement": "2.*@dev",
+    "react/promise": "1.*@dev",
+    "fennb/phirehose": "^1.0",
+    "react/stomp": "^0.2.0",
+    "clue/redis-react": "1.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Workshop\\": "src/"
+    }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "php -r \"copy('vendor/components/jquery/jquery.min.js', 'web/assets/jquery.min.js');\"",
+      "php -r \"copy('vendor/components/bootstrap/js/bootstrap.min.js', 'web/assets/bootstrap.min.js');\"",
+      "php -r \"copy('vendor/components/bootstrap/css/bootstrap.min.css', 'web/assets/bootstrap.min.css');\"",
+      "php -r \"copy('vendor/components/bootstrap/css/bootstrap.min.css.map', 'web/assets/bootstrap.min.css.map');\""
+    ]
+  }
+}

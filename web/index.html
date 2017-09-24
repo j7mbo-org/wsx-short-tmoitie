@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="assets/bootstrap.min.css" />
+    </head>
+    <body style="padding-top: 3.5rem;">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#">WSX</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Websocket Tutorial X</h1>
+                <h2><small class="text-muted">Non-Blocking Distributed Architecture</small></h2>
+                <p>
+                    WSX covers a more complex architecture. Distributed systems can communicate by using messaging and
+                    the STOMP protocol enables us to incorporate RabbitMQ with the React event loop asynchronously.
+                    WSX also covers Pub/Sub and RPC patterns over the Websocket protocol using WAMP version 2.
+                </p>
+                <hr />
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <h2>Streamed Data</h2>
+                            <div id="data-tweet" class="alert alert-primary" role="alert">
+                                No Websocket data here in <code class="highlighter-rouge">#data-tweet</code> yet...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="container">
+                <h2>
+                    Your Tasks:
+                </h2>
+                <p>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-primary">
+                            <p>
+                                <span class="badge badge-success">#1</span>
+                                Use phirehose to subscribe to a twitter stream and place this data into a RabbitMQ queue
+                            </p>
+                            <div class="jumbotron alert-primary">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <strong>Files used</strong>
+                                    </div>
+                                    <div class="col-9">
+                                        <strong>What to do</strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        bin/twitter-stream.php
+                                    </div>
+                                    <div class="col-9">
+                                        <p>
+                                            There are two @todos in this file. First, create an application on
+                                            <a href="http://apps.twitter.com">apps.twitter.com</a> and get the four
+                                            tokens you need.
+                                        </p>
+                                        <p>
+                                            In the second @todo, put these tweets in RabbitMQ. Ensure that you understand
+                                            what the file is doing.
+                                        </p>
+                                        <strong>Links</strong>
+                                        <br />
+                                        <a href="http://localhost:15673">
+                                            RabbitMQ Management / Statistics
+                                        </a>
+                                        <small>(use rabbitmq:rabbitmq to login - you need this to watch your queues!)</small>
+                                        <br />
+                                        <p>
+                                            <a href="https://github.com/fennb/phirehose/wiki/Introduction">
+                                                Phirehose Documentation
+                                            </a>
+                                        </p>
+                                        <strong>How do I know when I'm done?</strong>
+                                        <p>
+                                            Check the RabbitMQ statistics. You should have data constantly coming through
+                                            the exchange, and the queue should top out at 1000 messages.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-primary">
+                            <p>
+                                <span class="badge badge-success">#2</span>
+                                Utilise react/STOMP to consume RabbitMQ messages asynchronously while event loop is running
+                            </p>
+                            <div class="jumbotron alert-primary">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <strong>Files used</strong>
+                                    </div>
+                                    <div class="col-9">
+                                        <strong>What to do</strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        bin/websocket-server.php
+                                        <br />
+                                        src/EventHandler.php
+                                    </div>
+                                    <div class="col-9">
+                                        <p>
+                                            Firstly, you need to edit broker and client initiation code in websocket-server.php.
+                                            Here, we are connecting over STOMP. We want to subscribe with the client and
+                                            call an event handler method (using a callable for the callback - you may need
+                                            to pass in the event handler object to the closure).
+                                        </p>
+                                        <p>
+                                            You'll also need to create this method which will handle broadcasting the tweet
+                                            data received in the EventHandler class.
+                                        </p>
+                                        <p>
+                                            The RabbitMQ Stomp Plugin documentation contains a <strong>Destinations</strong>
+                                            section. This is <strong>important</strong> as there is a naming convention
+                                            used to subscribe to a queue (we want to use a queue, not an exchange). We need
+                                            to use this name in the subscribe method in websocket-server.php.
+                                        </p>
+                                        <a href="https://github.com/friends-of-reactphp/stomp#example">
+                                            react/stomp Example
+                                        </a>
+                                        <br />
+                                        <p>
+                                            <a href="http://www.rabbitmq.com/stomp.html">
+                                                RabbitMQ Stomp Plugin Documentation
+                                            </a>
+                                            <small>CTRL / Apple + F and search for "Destinations"</small>
+                                        </p>
+                                        <strong>How do I know when I'm done?</strong>
+                                        <p>
+                                            Check the RabbitMQ statistics. You should see messages no longer completely
+                                            filling up the queue because they'll be being processed. Try echoing out the
+                                            message (or use var_dump()) to see what it contains in your event handler method,
+                                            triggered by STOMP.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-primary">
+                            <p>
+                                <span class="badge badge-success">#3</span>
+                                Broadcast data retrieved from RabbitMQ over Websockets to subscribed clients in the event
+                                loop, and display this in the browser
+                            </p>
+                            <div class="jumbotron alert-primary">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <strong>Files used</strong>
+                                    </div>
+                                    <div class="col-9">
+                                        <strong>What to do</strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        src/EventHandler.php
+                                        <br />
+                                        web/assets/websockets.js
+                                    </div>
+                                    <div class="col-9">
+                                        <p>
+                                            In your event handler method triggered by STOMP in the previous task, you'll
+                                            have access to a $frame, a part of which contains the tweet string.
+                                        </p>
+                                        <p>
+                                            With this tweet string, publish() on the session. Use $args or $argsKw, it's
+                                            up to you, but make sure that in the javascript file you also use args or argsKw
+                                            parameter and then display the data in the div at the bottom.
+                                        </p>
+                                        <p>
+                                            <strong>Useful documentation</strong>
+                                            <br />
+                                            <a href="https://github.com/voryx/Thruway#php-client-example">
+                                                voryx/thruway Documentation
+                                            </a>
+                                            <br />
+                                            <a href="https://github.com/crossbario/autobahn-js#show-me-some-code">
+                                                autobahn.js Documentation
+                                            </a>
+                                        </p>
+                                        <p>
+                                            <strong>How do I know when I'm done?</strong>
+                                            <br />
+                                            Tweets will start displaying in the div at the top.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-primary">
+                            <p>
+                                <span class="badge badge-success">#4</span>
+                                Make an RPC from a change-filter.php to your Event Handler
+                            </p>
+                            <div class="jumbotron alert-primary">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <strong>Files used</strong>
+                                    </div>
+                                    <div class="col-9">
+                                        <strong>What to do?</strong>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        bin/change-filter.php
+                                        <br />
+                                        web/assets/websockets.js
+                                    </div>
+                                    <div class="col-9">
+                                        <p>
+                                            Register an RPC endpoint in your event handler class, and call it with change-filter.php
+                                            with some command-line arguments containing the filters.
+                                        </p>
+                                        <p>
+                                            Your RPC endpoint should place these in redis, which is what twitter-stream.php will
+                                            be calling every ~5 seconds to check for new filters to use.
+                                        </p>
+                                        <p>
+                                            If you have time, create an input box in index.html and use the contents of this
+                                            to call() the RPC endpoint as well to showcase PHP clients and JavaScript clients.
+                                        </p>
+                                        <p>
+                                            <strong>Useful Documentation</strong>
+                                            <br />
+                                            <a href="https://github.com/voryx/Thruway#php-client-example">
+                                                voryx/thruway Documentation
+                                            </a>
+                                            <br />
+                                            <a href="https://github.com/crossbario/autobahn-js#show-me-some-code">
+                                                autobahn.js Documentation
+                                            </a>
+                                        </p>
+                                        <p>
+                                            <strong>How do I know when I'm done?</strong>
+                                            <br />
+                                            Echo out what you receive in your RPC endpoint and see if it appears in terminal.
+                                            Also, check redis to see if the data has been saved correctly.
+                                            <br />
+                                            You can run:
+                                            <code class="highlighter-rouge">docker-compose exec redis redis-cli</code> and
+                                            try <code class="highlighter-rouge">KEYS *</code> or <code class="highlighter-rouge">get filter</code>
+                                            (or whatever you've named the redis key) to check.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <hr />
+            <footer>
+                <p class="text-muted">James Mallison - PHPNW 2017</p>
+            </footer>
+        </div>
+
+        <script type="text/javascript" src="assets/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/popper.min.js"></script>
+        <script type="text/javascript" src="assets/bootstrap.min.js"></script>
+        <script type="text/javascript" src="assets/autobahn.min.js"></script>
+        <script type="text/javascript" src="assets/websockets.js"></script>
+    </body>
+</html>

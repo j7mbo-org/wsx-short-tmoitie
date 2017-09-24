@@ -1,0 +1,42 @@
+version: '3'
+
+networks:
+    dev_network:
+        external: true
+
+services:
+
+    php:
+        container_name: websockets-workshop-4-php-short
+        build: ./docker/php
+        ports:
+            - 1337:80
+            - 1338:1338
+        volumes:
+            - ./:/appdata
+        networks:
+            - dev_network
+
+    rabbitmq:
+        container_name: websockets-workshop-4-rabbitmq-short
+        build: ./docker/rabbitmq/
+        expose:
+            - 15673
+            - 5673
+        ports:
+            - "15673:15672"
+            - "5673:5672"
+        environment:
+            RABBITMQ_DEFAULT_USER: "rabbitmq"
+            RABBITMQ_DEFAULT_PASS: "rabbitmq"
+            RABBITMQ_DEFAULT_VHOST: "/"
+        networks:
+            - dev_network
+
+    redis:
+        container_name: websockets-workshop-4-redis-short
+        build: ./docker/redis/
+        expose:
+            - 6379
+        networks:
+            - dev_network
