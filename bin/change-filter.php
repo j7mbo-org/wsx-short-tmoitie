@@ -47,8 +47,8 @@ $client = new class('our-namespace', $loop, $filters) extends \Thruway\Peer\Clie
     public function onSessionStart($session, $transport)
     {
         // @todo call() the RPC endpoint you create in the event handler
-        // @todo remember, call takes args and argsKw parameters.
-        // @todo Make sure you set aknowledge to true, and use then-> to close the session and stop the loop (see slides)
+        //       remember, call takes args and argsKw parameters.
+        //       Make sure you set aknowledge to true, and use then-> to close the session and stop the loop (see slides)
     }
 };
 

@@ -29,14 +29,14 @@ $router       = new Router($loop);
 $eventHandler = new EventHandler('our-namespace', $loop);
 
 /**
- * @todo STOMP with RabbitMQ specifies the queue name must be prefixed with something before an external queue name (it's in the docs)
- * @todo Here, you should connect with the STOMP client. Then(), subscribe and the callback should be
- * @todo a function in your event handler, so everything is grouped together nicely and your business logic isn't in this
- * @todo startup script! This will allow you to consume RabbitMQ messages async. You will need to read the docs!
-// **/
+ * @todo STOMP with RabbitMQ specifies the queue name must be prefixed with something before an external queue name
+ *       (it's in the docs)
+ *       Here, you should connect with the STOMP client. Then(), subscribe and the callback should be
+ *       a function in your event handler
+* // **/
 $client->connect()->then(function (Client $client) use ($eventHandler) {
     // @todo Subscribe to RabbitMq (need to read the docs to figure out the name of the queue to use!!)
-    // @todo Use callback for event handler method, for example, 'onRabbitMQMessage'
+    //       Use callback for event handler (client) method, for example, 'onRabbitMQMessage'
 });
 
 /** The port we're handling websockets over **/

@@ -39,8 +39,8 @@ class EventHandler extends Client
     public function onSessionStart($session, $transport)
     {
         // @todo register an RPC endpoint to receive the filters, and put them in redis.
-        // @todo the RPC endpoint should have a callback as a callable, as another function in this class
-        // @todo Use \Redis, or even better, Clue\React\Redis\Client (RedisClient) as this is async (already installed)
-        // @todo Redis hostname is in $this->>redisHostName
+        //       the RPC endpoint should have a callback as a callable, as another function in this class
+        //       Use \Redis, or even better, Clue\React\Redis\Client (RedisClient) as this is async (already installed)
+        //       Redis hostname is in $this->>redisHostName
     }
 }
