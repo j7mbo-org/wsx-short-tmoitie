@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitad4b88c48b8109a457a73e05e9ce8b25
+class ComposerStaticInitee05d4333d46866eb8ec76dfad82c187
 {
     public static $files = array (
         '7844cce90d4037f1a077c08319eef109' => __DIR__ . '/..' . '/react/promise/src/React/Promise/functions_include.php',
@@ -161,13 +161,21 @@ class ComposerStaticInitad4b88c48b8109a457a73e05e9ce8b25
         ),
         'G' => 
         array (
-            'Guzzle\\Tests' => 
+            'Guzzle\\Stream' => 
             array (
-                0 => __DIR__ . '/..' . '/guzzle/guzzle/tests',
+                0 => __DIR__ . '/..' . '/guzzle/stream',
             ),
-            'Guzzle' => 
+            'Guzzle\\Parser' => 
             array (
-                0 => __DIR__ . '/..' . '/guzzle/guzzle/src',
+                0 => __DIR__ . '/..' . '/guzzle/parser',
+            ),
+            'Guzzle\\Http' => 
+            array (
+                0 => __DIR__ . '/..' . '/guzzle/http',
+            ),
+            'Guzzle\\Common' => 
+            array (
+                0 => __DIR__ . '/..' . '/guzzle/common',
             ),
         ),
         'E' => 
@@ -198,10 +206,10 @@ class ComposerStaticInitad4b88c48b8109a457a73e05e9ce8b25
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitad4b88c48b8109a457a73e05e9ce8b25::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitad4b88c48b8109a457a73e05e9ce8b25::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitad4b88c48b8109a457a73e05e9ce8b25::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitad4b88c48b8109a457a73e05e9ce8b25::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitee05d4333d46866eb8ec76dfad82c187::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitee05d4333d46866eb8ec76dfad82c187::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitee05d4333d46866eb8ec76dfad82c187::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitee05d4333d46866eb8ec76dfad82c187::$classMap;
 
         }, null, ClassLoader::class);
     }

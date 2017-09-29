@@ -8,8 +8,10 @@ $baseDir = dirname($vendorDir);
 return array(
     'React\\Stomp' => array($vendorDir . '/react/stomp/src'),
     'React\\Promise' => array($vendorDir . '/react/promise/src'),
-    'Guzzle\\Tests' => array($vendorDir . '/guzzle/guzzle/tests'),
-    'Guzzle' => array($vendorDir . '/guzzle/guzzle/src'),
+    'Guzzle\\Stream' => array($vendorDir . '/guzzle/stream'),
+    'Guzzle\\Parser' => array($vendorDir . '/guzzle/parser'),
+    'Guzzle\\Http' => array($vendorDir . '/guzzle/http'),
+    'Guzzle\\Common' => array($vendorDir . '/guzzle/common'),
     'Evenement' => array($vendorDir . '/evenement/evenement/src'),
     'Clue\\Redis\\Protocol' => array($vendorDir . '/clue/redis-protocol/src'),
 );
